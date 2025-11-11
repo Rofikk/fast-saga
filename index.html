@@ -77,6 +77,11 @@
     @media (max-width:640px){.hide-on-mobile{display:none}}
     /* give page bottom space so sticky doesn't cover content */
     main{padding-bottom:84px}
+      /* details/summary FAQ */
+    details{background:var(--card);border:1px solid #22252e;border-radius:12px;padding:14px;margin:8px 0;box-shadow:var(--shadow)}
+    details>summary{cursor:pointer;list-style:none;font-weight:700}
+    details>summary::-webkit-details-marker{display:none}
+    details[open]{border-color:#2d313c}
   </style>
 </head>
 <body>
@@ -155,12 +160,56 @@
             <span style="color:var(--accent);font-size:22px">Rp 149.000</span>
           </div>
           <div style="display:flex;gap:10px;flex-wrap:wrap">
-            <a class="btn" href="https://lynk.id/arofikk/v0zl35g3nddj" target="_blank" rel="noopener">Beli di Lynk</a>
+            <a class="btn" href="https://lynk.id/" target="_blank" rel="noopener">Beli di Lynk</a>
             <a class="btn secondary" href="#top">Kembali ke Atas</a>
           </div>
           <p class="muted" style="margin-top:10px;font-size:12px">*Konten ini untuk keperluan landing page/portofolio. Pastikan hak distribusi video dipatuhi sesuai kebijakan platform.</p>
         </div>
         <div class="poster"><img src="https://cdn.lynkid.my.id/draft-products/10-11-2025/1762789271993_5880863.png" alt="Furious 7 (2015)"/></div>
+      </div>
+    </section>
+      <!-- IMDb RATINGS -->
+    <section class="section" id="imdb">
+      <div class="container">
+        <h2>⭐ Rating IMDb (Referensi)</h2>
+        <p class="muted" style="margin-top:-6px">Ringkasan skor untuk 8 film (angka dapat berubah sewaktu‑waktu di IMDb).</p>
+        <div class="grid" style="grid-template-columns:repeat(2,1fr);gap:10px">
+          <div class="poster"><div class="label">2001 · The Fast and The Furious — <b>6.8/10</b> IMDb</div></div>
+          <div class="poster"><div class="label">2003 · 2 Fast 2 Furious — <b>5.9/10</b> IMDb</div></div>
+          <div class="poster"><div class="label">2006 · Tokyo Drift — <b>6.0/10</b> IMDb</div></div>
+          <div class="poster"><div class="label">2009 · Fast & Furious — <b>6.5/10</b> IMDb</div></div>
+          <div class="poster"><div class="label">2011 · Fast Five — <b>7.3/10</b> IMDb</div></div>
+          <div class="poster"><div class="label">2013 · Fast & Furious 6 — <b>7.0/10</b> IMDb</div></div>
+          <div class="poster"><div class="label">2015 · Furious 7 — <b>7.1/10</b> IMDb</div></div>
+          <div class="poster"><div class="label">2017 · The Fate of the Furious — <b>6.6/10</b> IMDb</div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="section" id="faq">
+      <div class="container">
+        <h2>❓ FAQ — Pertanyaan Umum</h2>
+        <details>
+          <summary>Apakah koleksi ini bisa ditonton online dan offline?</summary>
+          <div class="muted" style="margin-top:8px">Bisa. Setelah pembelian, Anda akan menerima tautan halaman koleksi. Streaming dapat berjalan online; file juga dapat diunduh untuk ditonton offline selama perangkat Anda mendukung formatnya.</div>
+        </details>
+        <details>
+          <summary>Format video & subtitle apa yang didukung?</summary>
+          <div class="muted" style="margin-top:8px">Video: MKV/MP4 (Full HD). Subtitle: SRT (Bahasa Indonesia). Untuk pemutaran di browser, disarankan MP4 (H.264 + AAC). Subtitle SRT bisa disematkan atau dipilih manual.</div>
+        </details>
+        <details>
+          <summary>Apakah ini konten resmi berlisensi?</summary>
+          <div class="muted" style="margin-top:8px">Halaman ini adalah landing portofolio untuk memamerkan desain koleksi. Pastikan setiap distribusi/penjualan materi film mematuhi ketentuan hak cipta & lisensi yang berlaku di platform Anda.</div>
+        </details>
+      </div>
+    </section>
+
+    <!-- LEGAL -->
+    <section class="section" id="legal">
+      <div class="container">
+        <h2>⚖️ Legal & Hak Cipta</h2>
+        <p class="muted">“Fast & Furious” adalah properti milik pemegang haknya masing‑masing. Halaman ini tidak berafiliasi dengan pemilik merek. Semua logo/poster yang ditampilkan untuk keperluan ilustrasi portofolio. Mohon patuhi hukum hak cipta di wilayah Anda.</p>
       </div>
     </section>
   </main>
