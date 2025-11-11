@@ -1,56 +1,180 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="id">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Streaming Player – Drive</title>
-<style>
-  body{margin:0;background:#0b0c0d;color:#f4f4f6;font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}
-  .wrap{max-width:960px;margin:20px auto;padding:0 12px}
-  .player{background:#121317;border:1px solid #1d1f27;border-radius:12px;overflow:hidden;box-shadow:0 8px 26px rgba(0,0,0,.45)}
-  video{width:100%;display:block;background:#000}
-  .bar{display:flex;justify-content:space-between;gap:10px;align-items:center;padding:10px 12px;border-top:1px solid #1d1f27;background:#0f1116;color:#a7a9b2;font-size:12px}
-  .wm{pointer-events:none;position:absolute;inset:0;display:flex;align-items:center;justify-content:center;opacity:.18}
-  .wm span{font-weight:800;font-size:22px;color:#fff;transform:rotate(-18deg);text-shadow:0 1px 2px rgba(0,0,0,.6)}
-</style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Fast & Furious Collection (2001–2017)</title>
+  <meta name="description" content="Koleksi 8 film Fast & Furious (2001–2017) dalam satu halaman: poster, trailer, dan tombol beli. Dibuat untuk GitHub Pages, ringan dan responsif."/>
+  <meta name="robots" content="index,follow" />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Fast & Furious Collection (2001–2017)" />
+  <meta property="og:description" content="8 film Fast & Furious (2001–2017) • Poster • Trailer • CTA beli sekarang." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://cdn.lynkid.my.id/draft-products/10-11-2025/1762788757530_5735416.png" />
+  <meta property="og:url" content="https://rofikk.github.io/fast-saga/" />
+
+  <!-- Fonts (tanpa JS) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg:#0b0b0c; --bg2:#111216; --card:#14161b; --text:#f2f2f2; --muted:#b7bac5; --accent:#ffd34e; --accent2:#ff7d00;
+      --br:14px; --shadow: 0 10px 30px rgba(0,0,0,.35);
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0}
+    body{font-family:Poppins,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;background:linear-gradient(180deg,var(--bg),#090a0c 55%,var(--bg2));color:var(--text)}
+    a{color:inherit;text-decoration:none}
+    img{max-width:100%;display:block}
+    .container{width:min(1100px,92vw);margin-inline:auto}
+    .section{padding:64px 0}
+    .muted{color:var(--muted)}
+    .btn{display:inline-block;background:linear-gradient(90deg,var(--accent),var(--accent2));color:#111;padding:14px 20px;border-radius:12px;font-weight:800;box-shadow:var(--shadow);transition:transform .15s ease, box-shadow .15s ease}
+    .btn:hover{transform:translateY(-2px);box-shadow:0 14px 36px rgba(0,0,0,.5)}
+    .btn.secondary{background:#1b1d22;color:#fff;border:1px solid #2a2d36}
+
+    /* NAV */
+    .nav{position:sticky;top:0;z-index:50;background:rgba(10,11,13,.7);backdrop-filter:blur(10px);border-bottom:1px solid #1f222a}
+    .nav-inner{display:flex;align-items:center;justify-content:space-between;padding:12px 0;gap:12px}
+    .logo{display:flex;align-items:center;gap:10px;font-weight:800;letter-spacing:.5px}
+    .logo i{width:26px;height:26px;border-radius:6px;background:linear-gradient(120deg,var(--accent),var(--accent2));display:inline-block}
+    .price{display:flex;align-items:center;gap:10px;font-weight:700}
+    .price s{color:#9aa0aa;font-weight:400}
+
+    /* HERO */
+    .hero{position:relative;padding:86px 0 72px;overflow:hidden}
+    .hero::before{content:"";position:absolute;inset:0;background:url('https://cdn.lynkid.my.id/draft-products/10-11-2025/1762788757530_5735416.png') center/cover no-repeat;filter:brightness(.35) saturate(1.15)}
+    .hero::after{content:"";position:absolute;inset:auto 0 0 0;height:50%;background:linear-gradient(180deg,rgba(11,11,12,0) 0%, rgba(11,11,12,.95) 100%)}
+    .hero > .container{position:relative;z-index:1}
+    .hero-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:28px;align-items:center}
+    .hero h1{margin:0 0 10px;font-size:clamp(28px,5vw,52px);line-height:1.05}
+    .badge{display:inline-flex;gap:8px;align-items:center;border:1px solid #2a2d36;background:#121318;border-radius:999px;padding:6px 12px;color:#eaeaf0;font-size:12px}
+    .hero-cards{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+    .card{aspect-ratio:2/3;border-radius:10px;overflow:hidden;border:1px solid #2a2d36;background:#1a1b20;box-shadow:var(--shadow)}
+
+    /* GRID */
+    .grid{display:grid;gap:14px}
+    .cols-4{grid-template-columns:repeat(4,1fr)}
+    @media (max-width:960px){.cols-4{grid-template-columns:repeat(3,1fr)}}
+    @media (max-width:680px){.cols-4{grid-template-columns:repeat(2,1fr)}}
+
+    .poster{background:var(--card);border:1px solid #22252e;border-radius:12px;overflow:hidden;box-shadow:var(--shadow)}
+    .label{padding:10px 12px;border-top:1px solid #22252e;font-size:13px;color:#dfe2ea}
+
+    /* Trailer */
+    .frame{position:relative;padding-top:56.25%;border-radius:12px;overflow:hidden;border:1px solid #22252e;box-shadow:var(--shadow)}
+    .frame iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+
+    /* Sticky buy bar (mobile aware) */
+    .sticky{position:fixed;left:0;right:0;bottom:0;z-index:60;background:rgba(12,13,15,.92);backdrop-filter:blur(8px);border-top:1px solid #21242c}
+    .sticky-inner{width:min(1100px,92vw);margin:auto;display:flex;gap:10px;align-items:center;justify-content:space-between;padding:10px 0}
+    .sticky .price{font-size:14px}
+    .sticky .cta{display:flex;gap:8px}
+    .hide-on-mobile{display:block}
+    @media (max-width:640px){.hide-on-mobile{display:none}}
+    /* give page bottom space so sticky doesn't cover content */
+    main{padding-bottom:84px}
+  </style>
 </head>
 <body>
-  <div class="wrap">
-    <div class="player" style="position:relative">
-      <div class="wm"><span id="wmText">Untuk: - · Akses Pribadi</span></div>
+  <!-- NAV -->
+  <nav class="nav">
+    <div class="container nav-inner">
+      <div class="logo"><i></i> FAST & FURIOUS COLLECTION</div>
+      <div class="price">
+        <s>Rp 248.333</s>
+        <span style="color:var(--accent)">Rp 149.000</span>
+        <a class="btn secondary hide-on-mobile" href="#beli">Beli</a>
+      </div>
+    </div>
+  </nav>
 
-      <!-- HAPUS crossorigin & type. Pakai uc?export=download&id=... -->
-      <video id="v" controls preload="metadata" poster=""
-             playsinline controlsList="nodownload" disablepictureinpicture>
-        <source src="https://drive.google.com/uc?export=download&id=1nUBNKQvNVP9CX2acZvobxX5nJbLkQH3t">
-        <!-- Jika punya MP4 juga, boleh tambahkan source kedua:
-        <source src="URL_VIDEO_MP4" type="video/mp4">
-        -->
-        <!-- Subtitle VTT tetap bisa -->
-        <track kind="subtitles" src="SUB_ID.vtt" srclang="id" label="Bahasa Indonesia" default>
-        Browser Anda tidak mendukung video HTML5.
-      </video>
+  <!-- HERO -->
+  <header class="hero" id="top">
+    <div class="container hero-grid">
+      <div>
+        <div class="badge">🎬 Paket Digital · 8 Film (2001–2017)</div>
+        <h1>From the Streets to a Legend</h1>
+        <p class="muted">Rasakan 16 tahun aksi, persaudaraan, dan kecepatan—dari L.A. ke misi global. Halaman ini dibuat ringan untuk GitHub Pages: cepat, responsif, dan siap jualan.</p>
+        <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:12px">
+          <a class="btn" href="#beli" aria-label="Beli sekarang">BELI SEKARANG – Rp 149.000</a>
+          <a class="btn secondary" href="#trailer" aria-label="Lihat trailer">Lihat Trailer</a>
+        </div>
+      </div>
+      <div>
+        <div class="hero-cards" aria-hidden="true">
+          <div class="card"><img src="https://cdn.lynkid.my.id/draft-products/10-11-2025/1762788757530_5735416.png" alt="Poster The Fast and The Furious (2001)"></div>
+          <div class="card"><img src="https://cdn.lynkid.my.id/draft-products/10-11-2025/1762788873006_4098471.png" alt="Poster 2 Fast 2 Furious (2003)"></div>
+          <div class="card"><img src="https://cdn.lynkid.my.id/draft-products/10-11-2025/1762789118940_6489194.png" alt="Poster Tokyo Drift (2006)"></div>
+          <div class="card"><img src="https://cdn.lynkid.my.id/draft-products/10-11-2025/1762789155131_7395223.png" alt="Poster Fast & Furious (2009)"></div>
+        </div>
+      </div>
+    </div>
+  </header>
 
-      <div class="bar">
-        <div>Jika tidak play: muat ulang halaman atau lihat opsi MP4 di bawah.</div>
-        <button onclick="fs()" style="background:#ffd34e;color:#111;border:none;padding:8px 12px;border-radius:8px;font-weight:800;cursor:pointer">⤢ Fullscreen</button>
+  <main>
+    <!-- TRAILER -->
+    <section class="section" id="trailer">
+      <div class="container">
+        <h2>🎥 Trailer Saga 2001–2017</h2>
+        <p class="muted">Cuplikan perjalanan dari jalanan L.A. hingga misi global.</p>
+        <div class="frame">
+          <iframe src="https://www.youtube.com/embed/gLPNverkaJk" title="Fast & Furious Trailer Compilation" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- GRID POSTERS -->
+    <section class="section">
+      <div class="container">
+        <h2>🎞️ Koleksi Lengkap (2001–2017)</h2>
+        <div class="grid cols-4">
+          <article class="poster"><img src="https://cdn.lynkid.my.id/draft-products/10-11-2025/1762788757530_5735416.png" alt="The Fast and The Furious (2001)"><div class="label">2001 · The Fast and The Furious</div></article>
+          <article class="poster"><img src="https://cdn.lynkid.my.id/draft-products/10-11-2025/1762788873006_4098471.png" alt="2 Fast 2 Furious (2003)"><div class="label">2003 · 2 Fast 2 Furious</div></article>
+          <article class="poster"><img src="https://cdn.lynkid.my.id/draft-products/10-11-2025/1762789118940_6489194.png" alt="The Fast and The Furious: Tokyo Drift (2006)"><div class="label">2006 · Tokyo Drift</div></article>
+          <article class="poster"><img src="https://cdn.lynkid.my.id/draft-products/10-11-2025/1762789155131_7395223.png" alt="Fast & Furious (2009)"><div class="label">2009 · Fast & Furious</div></article>
+          <article class="poster"><img src="https://cdn.lynkid.my.id/draft-products/10-11-2025/1762789201016_6452859.png" alt="Fast Five (2011)"><div class="label">2011 · Fast Five</div></article>
+          <article class="poster"><img src="https://cdn.lynkid.my.id/draft-products/10-11-2025/1762789232364_9810389.png" alt="Fast & Furious 6 (2013)"><div class="label">2013 · Fast & Furious 6</div></article>
+          <article class="poster"><img src="https://cdn.lynkid.my.id/draft-products/10-11-2025/1762789271993_5880863.png" alt="Furious 7 (2015)"><div class="label">2015 · Furious 7</div></article>
+          <article class="poster"><img src="https://cdn.lynkid.my.id/draft-products/10-11-2025/1762789308327_9409708.png" alt="The Fate of the Furious (2017)"><div class="label">2017 · The Fate of the Furious</div></article>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA SECTION -->
+    <section class="section" id="beli">
+      <div class="container" style="display:grid;gap:14px;grid-template-columns:1.1fr .9fr;align-items:center">
+        <div>
+          <h2>🎁 Dapatkan Paket Lengkap</h2>
+          <p class="muted">8 film, poster digital, dan halaman koleksi elegan untuk ditautkan dari Lynk. Harga promo:</p>
+          <div class="price" style="margin:10px 0 14px">
+            <s>Rp 248.333</s>
+            <span style="color:var(--accent);font-size:22px">Rp 149.000</span>
+          </div>
+          <div style="display:flex;gap:10px;flex-wrap:wrap">
+            <a class="btn" href="https://lynk.id/" target="_blank" rel="noopener">Beli di Lynk</a>
+            <a class="btn secondary" href="#top">Kembali ke Atas</a>
+          </div>
+          <p class="muted" style="margin-top:10px;font-size:12px">*Konten ini untuk keperluan landing page/portofolio. Pastikan hak distribusi video dipatuhi sesuai kebijakan platform.</p>
+        </div>
+        <div class="poster"><img src="https://cdn.lynkid.my.id/draft-products/10-11-2025/1762789271993_5880863.png" alt="Furious 7 (2015)"/></div>
+      </div>
+    </section>
+  </main>
+
+  <!-- STICKY BUY BAR (mobile-first) -->
+  <div class="sticky" role="region" aria-label="Bar pembelian">
+    <div class="sticky-inner">
+      <div class="price"><s>Rp 248.333</s> <span style="color:var(--accent)">Rp 149.000</span></div>
+      <div class="cta">
+        <a class="btn" href="#beli">Beli</a>
+        <a class="btn secondary" href="#trailer">Trailer</a>
       </div>
     </div>
   </div>
 
-<script>
-  // Watermark dari query (?buyer=Nama&exp=YYYY-MM-DD)
-  const qs = new URLSearchParams(location.search);
-  const buyer = qs.get('buyer') || 'Pembeli';
-  const exp = qs.get('exp') || '';
-  document.getElementById('wmText').textContent = `Untuk: ${buyer}${exp ? ' · Berlaku s/d ' + exp : ''}`;
-
-  function fs(){
-    const v = document.getElementById('v');
-    if (v.requestFullscreen) v.requestFullscreen();
-    else if (v.webkitRequestFullscreen) v.webkitRequestFullscreen();
-    else if (v.msRequestFullscreen) v.msRequestFullscreen();
-  }
-</script>
 </body>
 </html>
