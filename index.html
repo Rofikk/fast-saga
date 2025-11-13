@@ -68,6 +68,152 @@
     .frame{position:relative;padding-top:56.25%;border-radius:12px;overflow:hidden;border:1px solid #22252e;box-shadow:var(--shadow)}
     .frame iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
 
+    /* MINI LIBRARY PLAYER – 6 FILM TRILOGY */
+    .library-grid{
+      display:grid;
+      grid-template-columns:1.2fr .8fr;
+      gap:18px;
+      align-items:flex-start;
+    }
+    @media (max-width:800px){
+      .library-grid{grid-template-columns:1fr;}
+      .playlist{
+        max-height:260px;
+      }
+    }
+
+    .player-card{
+      background:var(--card);
+      border-radius:var(--br);
+      border:1px solid #22252e;
+      padding:14px;
+      box-shadow:var(--shadow);
+    }
+    .player-meta{
+      display:flex;
+      justify-content:space-between;
+      gap:10px;
+      align-items:center;
+      margin-bottom:8px;
+      flex-wrap:wrap;
+    }
+    .current-label{
+      font-size:11px;
+      text-transform:uppercase;
+      letter-spacing:.12em;
+      color:var(--muted);
+    }
+    .current-title{
+      font-weight:600;
+      font-size:15px;
+    }
+    .badge-trilogy{
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+      background:rgba(255,211,78,.12);
+      border-radius:999px;
+      padding:4px 10px;
+      border:1px solid rgba(255,211,78,.5);
+      font-size:11px;
+      color:var(--accent);
+    }
+    .badge-dot{
+      width:6px;
+      height:6px;
+      border-radius:999px;
+      background:var(--accent);
+    }
+    .main-video{
+      width:100%;
+      border-radius:12px;
+      border:1px solid #22252e;
+      background:#000;
+      max-height:60vh;
+    }
+
+        .playlist{
+      display:flex;
+      flex-direction:column;
+      gap:8px;
+      max-height:320px;      /* tinggi maksimum playlist */
+      overflow-y:auto;       /* aktifkan scroll vertikal */
+      padding-right:4px;     /* beri ruang biar scrollbar nggak nempel konten */
+    }
+
+    /* bikin scrollbar lebih tipis & rapi (Chrome/Edge) */
+    .playlist::-webkit-scrollbar{
+      width:6px;
+    }
+    .playlist::-webkit-scrollbar-track{
+      background:#14161b;
+      border-radius:999px;
+    }
+    .playlist::-webkit-scrollbar-thumb{
+      background:#2b2e38;
+      border-radius:999px;
+    }
+    .playlist::-webkit-scrollbar-thumb:hover{
+      background:#3b3f4c;
+    }
+
+    .film-card{
+      display:flex;
+      gap:10px;
+      align-items:center;
+      background:var(--card);
+      border-radius:12px;
+      border:1px solid #22252e;
+      padding:8px 10px;
+      cursor:pointer;
+      transition:background .15s,border-color .15s,transform .15s;
+    }
+    .film-card:hover{
+      background:#1d1f27;
+      transform:translateY(-1px);
+    }
+    .film-card.active{
+      border-color:var(--accent);
+      background:linear-gradient(135deg,rgba(255,211,78,.16),#171822);
+    }
+    .thumb{
+      width:62px;
+      height:40px;
+      border-radius:10px;
+      background:radial-gradient(circle at top,#444b63,#101218);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-size:13px;
+      font-weight:600;
+      flex-shrink:0;
+      position:relative;
+      overflow:hidden;
+    }
+    .thumb::after{
+      content:"▶";
+      position:absolute;
+      font-size:18px;
+      color:rgba(255,255,255,.9);
+      text-shadow:0 0 6px rgba(0,0,0,.9);
+    }
+    .film-info{flex:1;min-width:0;}
+    .film-title{font-size:13px;font-weight:600;}
+    .film-meta{font-size:11px;color:var(--muted);}
+    .film-tags{
+      display:flex;
+      flex-wrap:wrap;
+      gap:4px;
+      margin-top:2px;
+    }
+    .tag-chip{
+      font-size:10px;
+      border-radius:999px;
+      border:1px solid #2c2f39;
+      padding:2px 7px;
+      color:var(--muted);
+    }
+
     /* Sticky buy bar (mobile aware) */
     .sticky{position:fixed;left:0;right:0;bottom:0;z-index:60;background:rgba(12,13,15,.92);backdrop-filter:blur(8px);border-top:1px solid #21242c}
     .sticky-inner{width:min(1100px,92vw);margin:auto;display:flex;gap:10px;align-items:center;justify-content:space-between;padding:10px 0}
@@ -132,6 +278,171 @@
       </div>
     </section>
 
+    <!-- MINI LIBRARY: 6 FILM TRILOGY -->
+    <section class="section" id="library">
+      <div class="container">
+        <h2>📺 Demo Library – 6 Film dalam 2 Trilogy</h2>
+        <p class="muted">
+          Bagian ini bisa kamu isi dengan <b>video legal milikmu</b> (review, behind the scene, atau karya original).
+          Jangan gunakan untuk streaming film komersial yang hak ciptanya bukan milikmu.
+        </p>
+
+        <div class="library-grid">
+          <!-- PLAYER -->
+          <div class="player-card">
+            <div class="player-meta">
+              <div>
+                <div class="current-label">Sedang diputar</div>
+                <div id="currentTitle" class="current-title">Pilih salah satu film di playlist</div>
+              </div>
+              <div id="currentTrilogyBadge" class="badge-trilogy" style="display:none;">
+                <span class="badge-dot"></span>
+                <span id="currentTrilogyText"></span>
+              </div>
+            </div>
+
+            <video id="mainPlayer" class="main-video" controls preload="metadata" poster="">
+              Browsermu tidak mendukung pemutar video HTML5.
+            </video>
+
+            <p class="muted" style="margin-top:6px;font-size:11px">
+              ⚠️ Pastikan semua video yang kamu unggah di sini adalah konten milikmu sendiri atau konten yang sudah kamu dapatkan izinnya.
+              Jangan mengunggah film komersial yang tidak kamu miliki haknya.
+            </p>
+          </div>
+
+          <!-- PLAYLIST -->
+          <aside aria-label="Playlist 6 film" class="player-card" style="padding:10px">
+            <div class="current-label" style="margin-bottom:6px">Playlist · 8 Film</div>
+            <div class="playlist" id="playlist">
+              <!-- Trilogy 1 -->
+              <div class="film-card"
+                   data-src="https://example.com/video/trilogy1-part1.mp4"
+                   data-title="The Fast and The Furious (2001)"
+                   data-trilogy="Fast Saga"
+                   data-poster="">
+                <div class="thumb">T1-1</div>
+                <div class="film-info">
+                  <div class="film-title">2001 · The Fast and The Furious</div>
+                  <div class="film-meta">Balapan jalanan, penyamaran polisi, dan awal pertemuan Brian O’Conner dengan Dominic Toretto.</div>
+                  <div class="film-tags">
+                    <span class="tag-chip">Fast Saga 1</span><span class="tag-chip">Part 1</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="film-card"
+                   data-src="https://example.com/video/trilogy1-part2.mp4"
+                   data-title="2 Fast 2 Furious (2003)"
+                   data-trilogy="Fast Saga"
+                   data-poster="">
+                <div class="thumb">T1-2</div>
+                <div class="film-info">
+                  <div class="film-title">2003 · 2 Fast 2 Furious</div>
+                  <div class="film-meta">Brian O’Conner bekerja sama dengan teman lamanya Roman Pearce untuk menjatuhkan kartel berbahaya di Miami.</div>
+                  <div class="film-tags">
+                    <span class="tag-chip">Fast Saga 1</span><span class="tag-chip">Part 2</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="film-card"
+                   data-src="https://example.com/video/trilogy1-part3.mp4"
+                   data-title="The Fast and The Furious: Tokyo Drift (2006)"
+                   data-trilogy="Fast Saga"
+                   data-poster="">
+                <div class="thumb">T1-3</div>
+                <div class="film-info">
+                  <div class="film-title">2006 · Tokyo Drift</div>
+                  <div class="film-meta">Sean Boswell masuk ke dunia drifting Tokyo dan menghadapi persaingan dengan Yakuza muda.</div>
+                  <div class="film-tags">
+                    <span class="tag-chip">Fast Saga 1</span><span class="tag-chip">Part 3</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Trilogy 2 -->
+              <div class="film-card"
+                   data-src="https://example.com/video/trilogy2-part1.mp4"
+                   data-title="Fast & Furious (2009)"
+                   data-trilogy="Fast Saga"
+                   data-poster="">
+                <div class="thumb">T2-1</div>
+                <div class="film-info">
+                  <div class="film-title">2009 · Fast & Furious</div>
+                  <div class="film-meta">Dom dan Brian bersatu kembali untuk memburu kartel yang membunuh Letty.</div>
+                  <div class="film-tags">
+                    <span class="tag-chip">Fast Saga 2</span><span class="tag-chip">Part 1</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="film-card"
+                   data-src="https://example.com/video/trilogy2-part2.mp4"
+                   data-title="Fast Five (2011)"
+                   data-trilogy="Fast Saga"
+                   data-poster="">
+                <div class="thumb">T2-2</div>
+                <div class="film-info">
+                  <div class="film-title">2011 · Fast Five</div>
+                  <div class="film-meta">Dom dan Brian merencanakan perampokan besar di Rio sambil diburu agen DSS Luke Hobbs.</div>
+                  <div class="film-tags">
+                    <span class="tag-chip">Fast Saga 2</span><span class="tag-chip">Part 2</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="film-card"
+                   data-src="https://example.com/video/trilogy2-part3.mp4"
+                   data-title="Fast & Furious 6 (2013)"
+                   data-trilogy="Fast Saga"
+                   data-poster="">
+                <div class="thumb">T2-3</div>
+                <div class="film-info">
+                  <div class="film-title">2013 · Fast & Furious 6</div>
+                  <div class="film-meta">Tim Dom bekerja sama dengan Hobbs untuk menghentikan Owen Shaw dan menghadapi kembalinya Letty.</div>
+                  <div class="film-tags">
+                    <span class="tag-chip">Fast Saga 2</span><span class="tag-chip">Part 3</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="film-card"
+                   data-src="https://example.com/video/trilogy2-part3.mp4"
+                   data-title="Furious 7 (2015)"
+                   data-trilogy="Fast Saga"
+                   data-poster="">
+                <div class="thumb">T2-3</div>
+                <div class="film-info">
+                  <div class="film-title">2015 · Furious 7</div>
+                  <div class="film-meta">Tim Dom bekerja sama dengan Hobbs untuk menghentikan Owen Shaw dan menghadapi kembalinya Letty.</div>
+                  <div class="film-tags">
+                    <span class="tag-chip">Fast Saga 2</span><span class="tag-chip">Part 4</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="film-card"
+                   data-src="https://example.com/video/trilogy2-part3.mp4"
+                   data-title="The Fate of the Furious (2017)"
+                   data-trilogy="Fast Saga"
+                   data-poster="">
+                <div class="thumb">T2-3</div>
+                <div class="film-info">
+                  <div class="film-title">2015 · Furious 7</div>
+                  <div class="film-meta">Dom dipaksa berkhianat oleh teroris siber Cipher, memecah keluarga yang ia bangun.</div>
+                  <div class="film-tags">
+                    <span class="tag-chip">Fast Saga 2</span><span class="tag-chip">Part 5</span>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+
     <!-- GRID POSTERS -->
     <section class="section">
       <div class="container">
@@ -160,7 +471,13 @@
             <span style="color:var(--accent);font-size:22px">Rp 149.000</span>
           </div>
           <div style="display:flex;gap:10px;flex-wrap:wrap">
-            <a class="btn" href="https://lynk.id/" target="_blank" rel="noopener">Beli di Lynk</a>
+            <a class="btn"
+              href="https://lynk.id/arofikk/v0zl35g3nddj"
+              target="_blank"
+              rel="noopener">
+              Beli di Lynk
+            </a>
+
             <a class="btn secondary" href="#top">Kembali ke Atas</a>
           </div>
           <p class="muted" style="margin-top:10px;font-size:12px">*Konten ini untuk keperluan landing page/portofolio. Pastikan hak distribusi video dipatuhi sesuai kebijakan platform.</p>
@@ -202,6 +519,17 @@
           <summary>Apakah ini konten resmi berlisensi?</summary>
           <div class="muted" style="margin-top:8px">Halaman ini adalah landing portofolio untuk memamerkan desain koleksi. Pastikan setiap distribusi/penjualan materi film mematuhi ketentuan hak cipta & lisensi yang berlaku di platform Anda.</div>
         </details>
+        <details>
+          <summary>Bagaimana cara akses video setelah saya membayar?</summary>
+          <div class="muted" style="margin-top:8px">
+            1. Klik tombol <b>Beli di Lynk</b> dan selesaikan pembayaran di halaman Lynk resmi kamu.<br>
+            2. Setelah pembayaran berhasil, kamu akan menerima <b>pesan dan/atau email</b> dari Lynk berisi tautan ke <b>member area</b> khusus pembeli.<br>
+            3. Buka tautan tersebut, lalu tonton video melalui player & playlist yang tersedia.<br>
+            4. Simpan tautan tersebut agar bisa digunakan kembali di kemudian hari.<br><br>
+            Pastikan seluruh video di member area adalah konten yang kamu miliki hak distribusinya dan tidak melanggar hak cipta pihak lain.
+          </div>
+        </details>
+
       </div>
     </section>
 
@@ -214,12 +542,63 @@
     </section>
   </main>
 
+  <script>
+    (function () {
+      const player          = document.getElementById('mainPlayer');
+      const cards           = document.querySelectorAll('#playlist .film-card');
+      const currentTitleEl  = document.getElementById('currentTitle');
+      const trilogyBadge    = document.getElementById('currentTrilogyBadge');
+      const trilogyText     = document.getElementById('currentTrilogyText');
+
+      if (!player || !cards.length) return;
+
+      cards.forEach(card => {
+        card.addEventListener('click', () => {
+          const src     = card.getAttribute('data-src');
+          const title   = card.getAttribute('data-title')   || 'Memutar video';
+          const trilogy = card.getAttribute('data-trilogy') || '';
+          const poster  = card.getAttribute('data-poster')  || '';
+
+          if (!src) return;
+
+          player.src = src;
+          if (poster) player.poster = poster;
+
+          currentTitleEl.textContent = title;
+
+          if (trilogy) {
+            trilogyText.textContent = trilogy;
+            trilogyBadge.style.display = 'inline-flex';
+          } else {
+            trilogyBadge.style.display = 'none';
+          }
+
+          cards.forEach(c => c.classList.remove('active'));
+          card.classList.add('active');
+
+          player.play().catch(() => {});
+          // scroll ke player (berguna di mobile)
+          const library = document.getElementById('library');
+          if (library) {
+            const top = library.offsetTop - 80;
+            window.scrollTo({ top, behavior: 'smooth' });
+          }
+        });
+      });
+    })();
+  </script>
+
   <!-- STICKY BUY BAR (mobile-first) -->
   <div class="sticky" role="region" aria-label="Bar pembelian">
     <div class="sticky-inner">
       <div class="price"><s>Rp 248.333</s> <span style="color:var(--accent)">Rp 149.000</span></div>
       <div class="cta">
-        <a class="btn" href="#beli">Beli</a>
+        <a class="btn"
+          href="https://lynk.id/arofikk/v0zl35g3nddj"
+          target="_blank"
+          rel="noopener">
+          Beli
+        </a>
         <a class="btn secondary" href="#trailer">Trailer</a>
       </div>
     </div>
