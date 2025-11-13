@@ -278,53 +278,62 @@
       </div>
     </section>
 
-    <!-- MINI LIBRARY: 6 FILM TRILOGY -->
+        <!-- MINI LIBRARY: 8 FILM – YouTube Playlist -->
     <section class="section" id="library">
       <div class="container">
-        <h2>📺 Demo Library – 8 Film dalam 2 Trilogy</h2>
+        <h2>📺 Demo Library – Fast Saga Trailer Playlist</h2>
         <p class="muted">
-          Bagian ini bisa kamu isi dengan <b>video legal milikmu</b> (review, behind the scene, atau karya original).
-          Jangan gunakan untuk streaming film komersial yang hak ciptanya bukan milikmu.
+          Bagian ini menampilkan <b>playlist trailer resmi Fast & Furious (Fast Saga)</b> yang disematkan dari YouTube.
+          Semua video bersumber dari kanal legal dan hanya digunakan sebagai <i>preview</i>, bukan untuk menayangkan film penuh.
         </p>
 
         <div class="library-grid">
-          <!-- PLAYER -->
+          <!-- PLAYER (YouTube iframe) -->
           <div class="player-card">
             <div class="player-meta">
               <div>
                 <div class="current-label">Sedang diputar</div>
-                <div id="currentTitle" class="current-title">Pilih salah satu film di playlist</div>
+                <div id="currentTitle" class="current-title">
+                  2001 · The Fast and The Furious
+                </div>
               </div>
-              <div id="currentTrilogyBadge" class="badge-trilogy" style="display:none;">
+              <div id="currentTrilogyBadge" class="badge-trilogy">
                 <span class="badge-dot"></span>
-                <span id="currentTrilogyText"></span>
+                <span id="currentTrilogyText">Fast Saga</span>
               </div>
             </div>
 
-            <video id="mainPlayer" class="main-video" controls preload="metadata" poster="">
-              Browsermu tidak mendukung pemutar video HTML5.
-            </video>
+            <iframe
+              id="libraryPlayer"
+              class="main-video"
+              src="https://www.youtube.com/embed/9AVD_o4ftCo?rel=0"
+              title="Fast Saga Library Player"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowfullscreen
+            ></iframe>
 
             <p class="muted" style="margin-top:6px;font-size:11px">
-              ⚠️ Pastikan semua video yang kamu unggah di sini adalah konten milikmu sendiri atau konten yang sudah kamu dapatkan izinnya.
-              Jangan mengunggah film komersial yang tidak kamu miliki haknya.
+              ⚠️ Pastikan semua video di sini adalah konten milikmu sendiri atau konten yang sudah kamu dapatkan izinnya.
+              Jangan mengunggah/menautkan film komersial yang tidak kamu miliki hak distribusinya.
             </p>
           </div>
 
           <!-- PLAYLIST -->
-          <aside aria-label="Playlist 6 film" class="player-card" style="padding:10px">
+          <aside aria-label="Playlist 8 film" class="player-card" style="padding:10px">
             <div class="current-label" style="margin-bottom:6px">Playlist · 8 Film</div>
-            <div class="playlist" id="playlist">
+
+            <div class="playlist" id="filmPlaylist">
               <!-- Trilogy 1 -->
-              <div class="film-card"
-                   data-src="https://youtu.be/9AVD_o4ftCo?si=JEpkvI5izPWahI_x"
+              <div class="film-card active"
+                   data-video-id="9AVD_o4ftCo"
                    data-title="The Fast and The Furious (2001)"
-                   data-trilogy="Fast Saga"
-                   data-poster="">
+                   data-trilogy="Fast Saga">
                 <div class="thumb">T1-1</div>
                 <div class="film-info">
                   <div class="film-title">2001 · The Fast and The Furious</div>
-                  <div class="film-meta">Balapan jalanan, penyamaran polisi, dan awal pertemuan Brian O’Conner dengan Dominic Toretto.</div>
+                  <div class="film-meta">
+                    Balapan jalanan, penyamaran polisi, dan awal pertemuan Brian O’Conner dengan Dominic Toretto.
+                  </div>
                   <div class="film-tags">
                     <span class="tag-chip">Fast Saga 1</span><span class="tag-chip">Part 1</span>
                   </div>
@@ -332,14 +341,15 @@
               </div>
 
               <div class="film-card"
-                   data-src="https://youtu.be/F_VIM03DXWI?si=xIejD-htSK05eZGZ"
+                   data-video-id="F_VIM03DXWI"
                    data-title="2 Fast 2 Furious (2003)"
-                   data-trilogy="Fast Saga"
-                   data-poster="">
+                   data-trilogy="Fast Saga">
                 <div class="thumb">T1-2</div>
                 <div class="film-info">
                   <div class="film-title">2003 · 2 Fast 2 Furious</div>
-                  <div class="film-meta">Brian O’Conner bekerja sama dengan teman lamanya Roman Pearce untuk menjatuhkan kartel berbahaya di Miami.</div>
+                  <div class="film-meta">
+                    Brian O’Conner bekerja sama dengan Roman Pearce untuk menjatuhkan kartel berbahaya di Miami.
+                  </div>
                   <div class="film-tags">
                     <span class="tag-chip">Fast Saga 1</span><span class="tag-chip">Part 2</span>
                   </div>
@@ -347,14 +357,15 @@
               </div>
 
               <div class="film-card"
-                   data-src="https://youtu.be/p8HQ2JLlc4E?si=ki3xidsUqVlfrN4E"
+                   data-video-id="p8HQ2JLlc4E"
                    data-title="The Fast and The Furious: Tokyo Drift (2006)"
-                   data-trilogy="Fast Saga"
-                   data-poster="">
+                   data-trilogy="Fast Saga">
                 <div class="thumb">T1-3</div>
                 <div class="film-info">
                   <div class="film-title">2006 · Tokyo Drift</div>
-                  <div class="film-meta">Sean Boswell masuk ke dunia drifting Tokyo dan menghadapi persaingan dengan Yakuza muda.</div>
+                  <div class="film-meta">
+                    Sean Boswell masuk ke dunia drifting Tokyo dan menghadapi persaingan dengan Yakuza muda.
+                  </div>
                   <div class="film-tags">
                     <span class="tag-chip">Fast Saga 1</span><span class="tag-chip">Part 3</span>
                   </div>
@@ -363,14 +374,15 @@
 
               <!-- Trilogy 2 -->
               <div class="film-card"
-                   data-src="https://youtu.be/DvpRsUmqxrk?si=hBIXf_Bb16mp878u"
+                   data-video-id="DvpRsUmqxrk"
                    data-title="Fast & Furious (2009)"
-                   data-trilogy="Fast Saga"
-                   data-poster="">
+                   data-trilogy="Fast Saga">
                 <div class="thumb">T2-1</div>
                 <div class="film-info">
                   <div class="film-title">2009 · Fast & Furious</div>
-                  <div class="film-meta">Dom dan Brian bersatu kembali untuk memburu kartel yang membunuh Letty.</div>
+                  <div class="film-meta">
+                    Dom dan Brian bersatu kembali untuk memburu kartel yang membunuh Letty.
+                  </div>
                   <div class="film-tags">
                     <span class="tag-chip">Fast Saga 2</span><span class="tag-chip">Part 1</span>
                   </div>
@@ -378,14 +390,15 @@
               </div>
 
               <div class="film-card"
-                   data-src="https://youtu.be/vcn2GOuZCKI?si=smZuQRnl2IY_D6xg"
+                   data-video-id="vcn2GOuZCKI"
                    data-title="Fast Five (2011)"
-                   data-trilogy="Fast Saga"
-                   data-poster="">
+                   data-trilogy="Fast Saga">
                 <div class="thumb">T2-2</div>
                 <div class="film-info">
                   <div class="film-title">2011 · Fast Five</div>
-                  <div class="film-meta">Dom dan Brian merencanakan perampokan besar di Rio sambil diburu agen DSS Luke Hobbs.</div>
+                  <div class="film-meta">
+                    Dom dan Brian merencanakan perampokan besar di Rio sambil diburu agen DSS Luke Hobbs.
+                  </div>
                   <div class="film-tags">
                     <span class="tag-chip">Fast Saga 2</span><span class="tag-chip">Part 2</span>
                   </div>
@@ -393,14 +406,15 @@
               </div>
 
               <div class="film-card"
-                   data-src="https://youtu.be/oc_P11PNvRs?si=cJGAZZcRC2Jz7sB2"
+                   data-video-id="oc_P11PNvRs"
                    data-title="Fast & Furious 6 (2013)"
-                   data-trilogy="Fast Saga"
-                   data-poster="">
+                   data-trilogy="Fast Saga">
                 <div class="thumb">T2-3</div>
                 <div class="film-info">
                   <div class="film-title">2013 · Fast & Furious 6</div>
-                  <div class="film-meta">Tim Dom bekerja sama dengan Hobbs untuk menghentikan Owen Shaw dan menghadapi kembalinya Letty.</div>
+                  <div class="film-meta">
+                    Tim Dom bekerja sama dengan Hobbs untuk menghentikan Owen Shaw dan menghadapi kembalinya Letty.
+                  </div>
                   <div class="film-tags">
                     <span class="tag-chip">Fast Saga 2</span><span class="tag-chip">Part 3</span>
                   </div>
@@ -408,14 +422,15 @@
               </div>
 
               <div class="film-card"
-                   data-src="https://youtu.be/Skpu5HaVkOc?si=yCod9AoNFoAVumry"
+                   data-video-id="Skpu5HaVkOc"
                    data-title="Furious 7 (2015)"
-                   data-trilogy="Fast Saga"
-                   data-poster="">
-                <div class="thumb">T2-3</div>
+                   data-trilogy="Fast Saga">
+                <div class="thumb">T2-4</div>
                 <div class="film-info">
                   <div class="film-title">2015 · Furious 7</div>
-                  <div class="film-meta">Tim Dom bekerja sama dengan Hobbs untuk menghentikan Owen Shaw dan menghadapi kembalinya Letty.</div>
+                  <div class="film-meta">
+                    Deckard Shaw memburu tim Dom setelah kekalahan saudaranya; aksi berlanjut ke Abu Dhabi.
+                  </div>
                   <div class="film-tags">
                     <span class="tag-chip">Fast Saga 2</span><span class="tag-chip">Part 4</span>
                   </div>
@@ -423,14 +438,15 @@
               </div>
 
               <div class="film-card"
-                   data-src="https://youtu.be/9GvX2uexGkA?si=lR03u8jrNKbmcWdd"
+                   data-video-id="9GvX2uexGkA"
                    data-title="The Fate of the Furious (2017)"
-                   data-trilogy="Fast Saga"
-                   data-poster="">
-                <div class="thumb">T2-3</div>
+                   data-trilogy="Fast Saga">
+                <div class="thumb">T2-5</div>
                 <div class="film-info">
-                  <div class="film-title">2015 · Furious 7</div>
-                  <div class="film-meta">Dom dipaksa berkhianat oleh teroris siber Cipher, memecah keluarga yang ia bangun.</div>
+                  <div class="film-title">2017 · The Fate of the Furious</div>
+                  <div class="film-meta">
+                    Dom dipaksa berkhianat oleh teroris siber Cipher, memecah keluarga yang ia bangun.
+                  </div>
                   <div class="film-tags">
                     <span class="tag-chip">Fast Saga 2</span><span class="tag-chip">Part 5</span>
                   </div>
@@ -485,7 +501,8 @@
         <div class="poster"><img src="https://cdn.lynkid.my.id/draft-products/10-11-2025/1762789271993_5880863.png" alt="Furious 7 (2015)"/></div>
       </div>
     </section>
-      <!-- IMDb RATINGS -->
+    
+    <!-- IMDb RATINGS -->
     <section class="section" id="imdb">
       <div class="container">
         <h2>⭐ Rating IMDb (Referensi)</h2>
@@ -544,25 +561,24 @@
 
   <script>
     (function () {
-      const player          = document.getElementById('mainPlayer');
-      const cards           = document.querySelectorAll('#playlist .film-card');
-      const currentTitleEl  = document.getElementById('currentTitle');
-      const trilogyBadge    = document.getElementById('currentTrilogyBadge');
-      const trilogyText     = document.getElementById('currentTrilogyText');
+      const player         = document.getElementById('libraryPlayer');
+      const cards          = document.querySelectorAll('#filmPlaylist .film-card');
+      const currentTitleEl = document.getElementById('currentTitle');
+      const trilogyBadge   = document.getElementById('currentTrilogyBadge');
+      const trilogyText    = document.getElementById('currentTrilogyText');
 
       if (!player || !cards.length) return;
 
       cards.forEach(card => {
         card.addEventListener('click', () => {
-          const src     = card.getAttribute('data-src');
+          const videoId = card.getAttribute('data-video-id');
           const title   = card.getAttribute('data-title')   || 'Memutar video';
           const trilogy = card.getAttribute('data-trilogy') || '';
-          const poster  = card.getAttribute('data-poster')  || '';
 
-          if (!src) return;
+          if (!videoId) return;
 
-          player.src = src;
-          if (poster) player.poster = poster;
+          // ganti src iframe → YouTube embed + autoplay
+          player.src = `https://www.youtube.com/embed/${videoId}?rel=0&autoplay=1`;
 
           currentTitleEl.textContent = title;
 
@@ -576,7 +592,6 @@
           cards.forEach(c => c.classList.remove('active'));
           card.classList.add('active');
 
-          player.play().catch(() => {});
           // scroll ke player (berguna di mobile)
           const library = document.getElementById('library');
           if (library) {
