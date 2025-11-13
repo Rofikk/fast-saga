@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Member Area – Fast & Furious Collection</title>
+  <meta name="description" content="Member area khusus pembeli Lynk untuk mengakses koleksi video Fast Saga (playlist YouTube)."/>
+  <meta name="robots" content="noindex,nofollow" />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg:#0b0b0c; --bg2:#111216; --card:#14161b; --text:#f2f2f2; --muted:#b7bac5; --accent:#ffd34e; --accent2:#ff7d00;
+      --br:14px; --shadow: 0 10px 30px rgba(0,0,0,.35);
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0}
+    body{
+      font-family:Poppins,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+      background:linear-gradient(180deg,var(--bg),#090a0c 55%,var(--bg2));
+      color:var(--text);
+    }
+    a{color:inherit;text-decoration:none}
+    img{max-width:100%;display:block}
+    .container{width:min(1100px,92vw);margin-inline:auto}
+    .section{padding:48px 0}
+    .muted{color:var(--muted)}
+    .btn{
+      display:inline-block;background:linear-gradient(90deg,var(--accent),var(--accent2));
+      color:#111;padding:10px 18px;border-radius:999px;font-weight:700;
+      box-shadow:var(--shadow);border:0;cursor:pointer;
+    }
+    .btn.secondary{
+      background:#1b1d22;color:#fff;border:1px solid #2a2d36;box-shadow:none;
+    }
+
+    /* NAV */
+    .nav{position:sticky;top:0;z-index:50;background:rgba(10,11,13,.9);backdrop-filter:blur(10px);border-bottom:1px solid #1f222a}
+    .nav-inner{display:flex;align-items:center;justify-content:space-between;padding:10px 0;gap:12px}
+    .logo{display:flex;align-items:center;gap:10px;font-weight:800;letter-spacing:.5px;font-size:14px}
+    .logo i{width:26px;height:26px;border-radius:6px;background:linear-gradient(120deg,var(--accent),var(--accent2));display:inline-block}
+
+    /* HERO / HEADER */
+    .hero{padding:32px 0 16px}
+    .hero-grid{
+      display:grid;
+      grid-template-columns:1.6fr .9fr;
+      gap:20px;
+      align-items:flex-start;
+    }
+    @media (max-width:840px){
+      .hero-grid{grid-template-columns:1fr}
+    }
+    .badge{
+      display:inline-flex;gap:8px;align-items:center;
+      border:1px solid #2a2d36;background:#121318;
+      border-radius:999px;padding:6px 12px;
+      color:#eaeaf0;font-size:11px;
+    }
+    .hero h1{margin:10px 0 6px;font-size:clamp(22px,4vw,32px)}
+    .hero p{margin:4px 0}
+
+    .info-card{
+      background:var(--card);
+      border-radius:var(--br);
+      border:1px solid #22252e;
+      padding:14px;
+      box-shadow:var(--shadow);
+      font-size:13px;
+    }
+
+    /* PLAYER + PLAYLIST */
+    .player-layout{
+      display:grid;
+      grid-template-columns:1.6fr 1fr;
+      gap:18px;
+      align-items:flex-start;
+    }
+    @media (max-width:920px){
+      .player-layout{grid-template-columns:1fr}
+    }
+
+    .player-card{
+      background:var(--card);
+      border-radius:var(--br);
+      border:1px solid #22252e;
+      padding:14px;
+      box-shadow:var(--shadow);
+    }
+
+    .player-meta{
+      display:flex;
+      justify-content:space-between;
+      gap:10px;
+      align-items:center;
+      margin-bottom:8px;
+      flex-wrap:wrap;
+    }
+    .current-label{
+      font-size:11px;
+      text-transform:uppercase;
+      letter-spacing:.12em;
+      color:var(--muted);
+    }
+    .current-title{
+      font-weight:600;
+      font-size:15px;
+    }
+    .badge-trilogy{
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+      background:rgba(255,211,78,.12);
+      border-radius:999px;
+      padding:4px 10px;
+      border:1px solid rgba(255,211,78,.5);
+      font-size:11px;
+      color:var(--accent);
+    }
+    .badge-dot{
+      width:6px;
+      height:6px;
+      border-radius:999px;
+      background:var(--accent);
+    }
+
+    .video-frame{
+      position:relative;
+      padding-top:56.25%;
+      border-radius:12px;
+      overflow:hidden;
+      border:1px solid #22252e;
+      background:#000;
+      box-shadow:var(--shadow);
+    }
+    .video-frame iframe{
+      position:absolute;
+      inset:0;
+      width:100%;
+      height:100%;
+      border:0;
+    }
+
+    .playlist-card{
+      background:var(--card);
+      border-radius:var(--br);
+      border:1px solid #22252e;
+      padding:10px;
+      box-shadow:var(--shadow);
+    }
+    .playlist-header{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      margin-bottom:6px;
+    }
+    .playlist-count{
+      font-size:11px;
+      color:var(--muted);
+    }
+    .playlist{
+      display:flex;
+      flex-direction:column;
+      gap:8px;
+      max-height:360px;
+      overflow-y:auto;
+      padding-right:4px;
+    }
+    .playlist::-webkit-scrollbar{width:6px}
+    .playlist::-webkit-scrollbar-track{background:#14161b;border-radius:999px}
+    .playlist::-webkit-scrollbar-thumb{background:#2b2e38;border-radius:999px}
+    .playlist::-webkit-scrollbar-thumb:hover{background:#3b3f4c}
+
+    .film-card{
+      display:flex;
+      gap:10px;
+      align-items:center;
+      background:var(--card);
+      border-radius:12px;
+      border:1px solid #22252e;
+      padding:8px 10px;
+      cursor:pointer;
+      transition:background .15s,border-color .15s,transform .15s;
+      text-align:left;
+    }
+    .film-card:hover{
+      background:#1d1f27;
+      transform:translateY(-1px);
+    }
+    .film-card.active{
+      border-color:var(--accent);
+      background:linear-gradient(135deg,rgba(255,211,78,.16),#171822);
+    }
+    .thumb{
+      width:62px;
+      height:40px;
+      border-radius:10px;
+      background:radial-gradient(circle at top,#444b63,#101218);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-size:11px;
+      font-weight:600;
+      flex-shrink:0;
+      position:relative;
+      overflow:hidden;
+      color:#fff;
+    }
+    .thumb::after{
+      content:"▶";
+      position:absolute;
+      font-size:16px;
+      color:rgba(255,255,255,.9);
+      text-shadow:0 0 6px rgba(0,0,0,.9);
+    }
+    .film-info{flex:1;min-width:0;}
+    .film-title{font-size:13px;font-weight:600;}
+    .film-meta{font-size:11px;color:var(--muted);}
+    .film-tags{
+      display:flex;
+      flex-wrap:wrap;
+      gap:4px;
+      margin-top:2px;
+    }
+    .tag-chip{
+      font-size:10px;
+      border-radius:999px;
+      border:1px solid #2c2f39;
+      padding:2px 7px;
+      color:var(--muted);
+    }
+
+    /* FOOTER */
+    footer{padding:24px 0 40px;font-size:11px;color:var(--muted);text-align:center}
+  </style>
+</head>
+<body>
+
+  <!-- STATE: LOCKED (default) -->
+  <div id="locked" style="
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    padding:24px;
+    background:#050607;
+    color:#f2f2f2;
+    font-family:Poppins,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+  ">
+    <div style="max-width:420px">
+      <h1 style="font-size:22px;margin-bottom:8px;">Akses Khusus Pembeli</h1>
+      <p style="font-size:14px;opacity:.85;margin-bottom:16px;">
+        Halaman ini hanya dapat diakses menggunakan link khusus yang dikirim
+        setelah pembelian di Lynk.
+      </p>
+      <p style="font-size:13px;opacity:.8;">
+        Silakan kembali ke halaman Lynk dan pastikan Anda membuka link
+        <b>Member Area</b> yang benar dari email / riwayat pembelian.
+      </p>
+      <a href="https://lynk.id/arofikk/v0zl35g3nddj"
+        style="display:inline-block;margin-top:18px;padding:10px 18px;border-radius:999px;
+              background:#ffd34e;color:#111;text-decoration:none;font-weight:700;">
+        Kembali ke Halaman Pembelian
+      </a>
+    </div>
+  </div>
+
+  <!-- STATE: PAGE CONTENT (hanya tampil kalau key valid) -->
+  <div id="pageContent" style="display:none;">
+
+    <!-- NAV -->
+    <nav class="nav">
+      <div class="container nav-inner">
+        <div class="logo">
+          <i></i>
+          <span>FAST SAGA · MEMBER AREA</span>
+        </div>
+        <button class="btn secondary" onclick="history.back()">⬅ Kembali</button>
+      </div>
+    </nav>
+
+    <!-- HERO / INFO -->
+    <header class="hero">
+      <div class="container hero-grid">
+        <div>
+          <div class="badge">🔐 Akses Khusus Pembeli Lynk</div>
+          <h1>Selamat, akses koleksimu sudah aktif!</h1>
+          <p class="muted">
+            Terima kasih sudah mendukung karya ini.
+            Gunakan playlist di samping untuk memilih film, lalu tonton langsung lewat player di bawah.
+          </p>
+          <p class="muted" style="font-size:12px;margin-top:6px">
+            Tips: gunakan Wi-Fi atau kuota yang stabil untuk pengalaman streaming terbaik.
+          </p>
+        </div>
+        <div class="info-card">
+          <strong>Cara pakai member area:</strong>
+          <ul style="padding-left:18px;margin:6px 0 0;font-size:12px">
+            <li>Pilih salah satu judul di playlist (klik kartu film).</li>
+            <li>Player utama otomatis memuat video YouTube terkait.</li>
+            <li>Kamu bisa fullscreen, adjust quality, dan aktifkan subtitle langsung dari kontrol YouTube.</li>
+            <li>Simpan halaman ini di bookmark agar mudah diakses lain waktu.</li>
+          </ul>
+        </div>
+      </div>
+    </header>
+
+    <!-- PLAYER + PLAYLIST -->
+    <main>
+      <section class="section" id="player">
+        <div class="container">
+          <div class="player-layout">
+            <!-- PLAYER -->
+            <div class="player-card">
+              <div class="player-meta">
+                <div>
+                  <div class="current-label">Sedang diputar</div>
+                  <div id="currentTitle" class="current-title">
+                    Pilih salah satu film di playlist
+                  </div>
+                </div>
+                <div id="currentTrilogyBadge" class="badge-trilogy" style="display:none;">
+                  <span class="badge-dot"></span>
+                  <span id="currentTrilogyText"></span>
+                </div>
+              </div>
+
+              <div class="video-frame">
+                <iframe
+                  id="memberPlayer"
+                  src=""
+                  title="Fast Saga Member Player"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  allowfullscreen
+                ></iframe>
+              </div>
+
+              <p class="muted" style="margin-top:8px;font-size:11px">
+                ⚠️ Video di-embed dari YouTube. Pastikan kamu masuk dengan akun yang punya izin menonton
+                (misal video unlisted di channel milikmu sendiri).
+              </p>
+            </div>
+
+            <!-- PLAYLIST -->
+            <aside class="playlist-card" aria-label="Playlist Fast Saga">
+              <div class="playlist-header">
+                <span class="current-label">Playlist · 8 Film</span>
+                <span class="playlist-count" id="playlistCount"></span>
+              </div>
+
+              <div class="playlist" id="playlist">
+                <!-- GANTI data-video-id dengan ID YouTube asli milikmu -->
+                <div class="film-card"
+                    data-video-id="9AVD_o4ftCo"
+                    data-title="The Fast and The Furious (2001)"
+                    data-trilogy="Fast Saga · Part 1">
+                  <div class="thumb">2001</div>
+                  <div class="film-info">
+                    <div class="film-title">The Fast and The Furious</div>
+                    <div class="film-meta">Awal pertemuan Brian O’Conner dan Dominic Toretto di jalanan L.A.</div>
+                    <div class="film-tags">
+                      <span class="tag-chip">Fast Saga 1</span><span class="tag-chip">Street Race</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="film-card"
+                    data-video-id="F_VIM03DXWI"
+                    data-title="2 Fast 2 Furious (2003)"
+                    data-trilogy="Fast Saga · Part 2">
+                  <div class="thumb">2003</div>
+                  <div class="film-info">
+                    <div class="film-title">2 Fast 2 Furious</div>
+                    <div class="film-meta">Brian & Roman beraksi di Miami melawan kartel berbahaya.</div>
+                    <div class="film-tags">
+                      <span class="tag-chip">Fast Saga 1</span><span class="tag-chip">Miami</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="film-card"
+                    data-video-id="p8HQ2JLlc4E"
+                    data-title="Tokyo Drift (2006)"
+                    data-trilogy="Fast Saga · Part 3">
+                  <div class="thumb">2006</div>
+                  <div class="film-info">
+                    <div class="film-title">Tokyo Drift</div>
+                    <div class="film-meta">Masuk ke dunia drifting di Tokyo dengan risiko tinggi.</div>
+                    <div class="film-tags">
+                      <span class="tag-chip">Fast Saga 1</span><span class="tag-chip">Drift</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="film-card"
+                    data-video-id="DvpRsUmqxrk"
+                    data-title="Fast & Furious (2009)"
+                    data-trilogy="Fast Saga · Part 4">
+                  <div class="thumb">2009</div>
+                  <div class="film-info">
+                    <div class="film-title">Fast & Furious</div>
+                    <div class="film-meta">Dom & Brian bersatu kembali memburu kartel pembunuh Letty.</div>
+                    <div class="film-tags">
+                      <span class="tag-chip">Fast Saga 2</span><span class="tag-chip">Reunion</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="film-card"
+                    data-video-id="vcn2GOuZCKI"
+                    data-title="Fast Five (2011)"
+                    data-trilogy="Fast Saga · Part 5">
+                  <div class="thumb">2011</div>
+                  <div class="film-info">
+                    <div class="film-title">Fast Five</div>
+                    <div class="film-meta">Tim merencanakan perampokan besar di Rio, diburu Luke Hobbs.</div>
+                    <div class="film-tags">
+                      <span class="tag-chip">Fast Saga 2</span><span class="tag-chip">Heist</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="film-card"
+                    data-video-id="oc_P11PNvRs"
+                    data-title="Fast & Furious 6 (2013)"
+                    data-trilogy="Fast Saga · Part 6">
+                  <div class="thumb">2013</div>
+                  <div class="film-info">
+                    <div class="film-title">Fast & Furious 6</div>
+                    <div class="film-meta">Melawan Owen Shaw dan menghadapi kembalinya Letty.</div>
+                    <div class="film-tags">
+                      <span class="tag-chip">Fast Saga 2</span><span class="tag-chip">Shaw</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="film-card"
+                    data-video-id="Skpu5HaVkOc"
+                    data-title="Furious 7 (2015)"
+                    data-trilogy="Fast Saga · Part 7">
+                  <div class="thumb">2015</div>
+                  <div class="film-info">
+                    <div class="film-title">Furious 7</div>
+                    <div class="film-meta">Konflik dengan Deckard Shaw dan perpisahan emosional.</div>
+                    <div class="film-tags">
+                      <span class="tag-chip">Fast Saga 2</span><span class="tag-chip">Family</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="film-card"
+                    data-video-id="9GvX2uexGkA"
+                    data-title="The Fate of the Furious (2017)"
+                    data-trilogy="Fast Saga · Part 8">
+                  <div class="thumb">2017</div>
+                  <div class="film-info">
+                    <div class="film-title">The Fate of the Furious</div>
+                    <div class="film-meta">Dom dipaksa berkhianat oleh teroris siber Cipher.</div>
+                    <div class="film-tags">
+                      <span class="tag-chip">Fast Saga 2</span><span class="tag-chip">Cipher</span>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </aside>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      Halaman member ini hanya contoh desain. Pastikan setiap penggunaan video mematuhi kebijakan hak cipta & lisensi yang berlaku.
+    </footer>
+
+    <!-- SCRIPT PLAYER YOUTUBE -->
+    <script>
+      (function(){
+        const playerIframe      = document.getElementById('memberPlayer');
+        const cards             = document.querySelectorAll('#playlist .film-card');
+        const currentTitleEl    = document.getElementById('currentTitle');
+        const trilogyBadge      = document.getElementById('currentTrilogyBadge');
+        const trilogyText       = document.getElementById('currentTrilogyText');
+        const playlistCountText = document.getElementById('playlistCount');
+
+        if (playlistCountText) {
+          playlistCountText.textContent = cards.length + ' video';
+        }
+
+        function setVideo(card, autoplay){
+          const vid = card.getAttribute('data-video-id');
+          const title = card.getAttribute('data-title') || 'Memutar video';
+          const trilogy = card.getAttribute('data-trilogy') || '';
+
+          if (!vid || !playerIframe) return;
+
+          const baseUrl = 'https://www.youtube.com/embed/' + vid;
+          const params = autoplay ? '?autoplay=1&rel=0' : '?rel=0';
+          playerIframe.src = baseUrl + params;
+
+          currentTitleEl.textContent = title;
+          if (trilogy){
+            trilogyText.textContent = trilogy;
+            trilogyBadge.style.display = 'inline-flex';
+          } else {
+            trilogyBadge.style.display = 'none';
+          }
+
+          cards.forEach(c => c.classList.remove('active'));
+          card.classList.add('active');
+
+          const top = document.getElementById('player').offsetTop - 80;
+          window.scrollTo({top, behavior:'smooth'});
+        }
+
+        cards.forEach(card => {
+          card.addEventListener('click', () => setVideo(card, true));
+        });
+
+        if (cards.length){
+          setVideo(cards[0], false);
+        }
+      })();
+    </script>
+  </div><!-- /#pageContent -->
+
+  <!-- SCRIPT VOUCHER KEY -->
+  <script>
+    (function () {
+      // KEY yang wajib ada di URL ?key=...
+      const REQUIRED_KEY = 'FAST-SAGA-001';
+      // contoh URL: https://rofikk.github.io/fast-saga/member.html?key=FAST-SAGA-001
+
+      const params = new URLSearchParams(window.location.search);
+      const key = params.get('key');
+
+      const page   = document.getElementById('pageContent');
+      const locked = document.getElementById('locked');
+
+      let valid = false;
+      if (key && key === REQUIRED_KEY) {
+        valid = true;
+      }
+
+      if (valid) {
+        page.style.display = 'block';
+        locked.style.display = 'none';
+      } else {
+        page.style.display = 'none';
+        locked.style.display = 'flex';
+      }
+    })();
+  </script>
+</body>
+</html>
